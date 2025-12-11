@@ -28,6 +28,30 @@ The repository serves as:
 
 **Note:** Moony operates as an immutable smart contract on Solana. This repository contains the deployment infrastructure code, not the operational code for running Moony (which is entirely on-chain).
 
+## Deployment References
+
+### Key Deployment Commits
+
+The following commits from the upstream [code-payments/ocp-server](https://github.com/code-payments/ocp-server) repository are particularly relevant to Moony's deployment:
+
+- **[Currency creator program v2](https://github.com/code-payments/ocp-server/commit/e35e8979b943ffee6818222dd4c157fc9ff6b3c7)** (`e35e897`) - Implements the currency creator program v2, including discrete table implementation for bonding curves and currency deployment infrastructure
+- **[Update currency worker package name](https://github.com/code-payments/ocp-server/commit/29eff0105a0406149060e23362ad70fd745d09e0)** (`29eff01`) - Updates currency worker package structure
+
+### Testing Configuration (Jeffy)
+
+Since Moony is not yet live, testing is performed using "Jeffy" addresses configured in the OCP server. The Jeffy test configuration can be found in:
+
+- **Configuration File:** [`ocp/config/config.go`](https://github.com/code-payments/ocp-server/blob/main/pkg/ocp/config/config.go) - Contains Jeffy mint, authority, and VM account addresses
+- **Reserve Worker:** [`ocp/worker/currency/reserve.go`](https://github.com/code-payments/ocp-server/blob/main/pkg/ocp/worker/currency/reserve.go) - Contains Jeffy-specific reserve logic
+
+**Jeffy Test Addresses:**
+- Mint: `52MNGpgvydSwCtC2H4qeiZXZ1TxEuRVCRGa8LAfk2kSj`
+- Authority: `jfy1btcfsjSn2WCqLVaxiEjp4zgmemGyRsdCPbPwnZV`
+- VM Account: `Bii3UFB9DzPq6UxgewF5iv9h1Gi8ZnP6mr7PtocHGNta`
+- VM Omnibus: `CQ5jni8XTXEcMFXS1ytNyTVbJBZHtHCzEtjBPowB3MLD`
+
+These addresses are defined in the upstream repository at [`pkg/ocp/config/config.go`](https://github.com/code-payments/ocp-server/blob/main/pkg/ocp/config/config.go#L28-L31).
+
 ## What is the Open Code Protocol?
 
 The Open Code Protocol (OCP) is a next-generation currency launchpad and payment system built on Solana. It provides the first L2 solution on top of Solana, utilizing an intent-based system backed by a sequencer to handle transactions.
