@@ -54,6 +54,11 @@ jobs:
             git merge --abort || true
             git reset --hard upstream/main
           fi
+          # Remove test workflow (not needed for mirror, requires Solana mainnet access)
+          if [ -f .github/workflows/test.yml ]; then
+            git rm .github/workflows/test.yml
+            git commit -m "Remove test workflow (not needed for mirror repository)" || true
+          fi
 
       - name: Push changes
         if: steps.check_updates.outputs.has_updates == 'true'
